@@ -30,30 +30,30 @@
     height: 30px;
 }
 #title{
-    color: #E63D63;
+    color: #E63D63 !important;
 }
 .nav-link:hover{
-    background-color: #E63D63;
+    background-color: #E63D63 !important;
 }
 #appears{
     position: relative;
     text-align:center;
 }
 #connect_button:hover{
-    background-color: #E63D63;
+    background-color: #E63D63 !important;
 }
 element.style{
-    background-color: #E63D63;
+    background-color: #E63D63 !important;
 }
 .main-button{
-    background-color: #E63D63;
+    background-color: #E63D63 !important;
     border-radius: 0%;
 }
 .circle-in-corner{
-    background-color:#E63D63;
+    background-color:#E63D63 !important;
 }
 #prepare:hover{
-    background-color: #E63D63;
+    background-color: #E63D63 !important;
 }
 
 a{
