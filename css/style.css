@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Koulen&family=VT323&display=swap');
+
+@media (min-width:992px) {
+    html.w-mod-js:not(.w-mod-ix) [data-w-id="dd719013-2c99-d9c6-652b-196161c3dc13"] {
+        -webkit-transform: translate3d(101%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+        -moz-transform: translate3d(101%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+        -ms-transform: translate3d(101%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+        transform: translate3d(101%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+        display: block;
+    }
+
+    html.w-mod-js:not(.w-mod-ix) [data-w-id="dd719013-2c99-d9c6-652b-196161c3dc10"] {
+        width: 7em;
+    }
+}
+*{
+    font-family: 'Koulen', cursive;
+}
+.main-header-wrap{
+    background-color: white;
+}
+#sill{
+    position: relative;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.brand-logo{
+    width: 30px;
+    height: 30px;
+}
+#title{
+    color: #E63D63;
+}
+.nav-link:hover{
+    background-color: #E63D63;
+}
+#appears{
+    position: relative;
+    text-align:center;
+}
+#connect_button:hover{
+    background-color: #E63D63;
+}
+element.style{
+    background-color: #E63D63;
+}
+.main-button{
+    background-color: #E63D63;
+    border-radius: 0%;
+}
+.circle-in-corner{
+    background-color:#E63D63;
+}
+#prepare:hover{
+    background-color: #E63D63;
+}
+
+a{
+    color: black;
+}
+#sneakpeek{
+    border-radius: 0%;
+}
+.scope-image{
+    border-radius: 0%;
+}
