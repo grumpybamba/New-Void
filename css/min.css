@@ -1853,7 +1853,7 @@ a{
     background-color:transparent;
     -webkit-transition:color .2s;
     transition:color .2s;
-    color:#598d3b;
+    color:#1e201d !important;
     text-decoration:none
 }
 a:hover{

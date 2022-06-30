@@ -16,6 +16,9 @@
 *{
     font-family: 'Koulen', cursive;
 }
+#connect_button{
+    color: #000 !important;
+}
 .main-header-wrap{
     background-color: white;
 }
