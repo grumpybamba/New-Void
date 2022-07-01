@@ -5475,13 +5475,13 @@ blockquote{
     position:relative;
     z-index:2;
     margin-bottom:1.5em;
-    font-family:Italiana,sans-serif;
+    /* font-family:Italiana,sans-serif; */
     font-size:1.8em;
     font-weight:400;
     letter-spacing:.05em
 }
 .home-header-toptitle-1.is-2nd{
-    font-family:Syne,sans-serif
+    /* font-family:Syne,sans-serif */
 }
 .page-loader-paragraph{
     position:relative;
