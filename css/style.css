@@ -14,7 +14,7 @@
     }
 }
 *{
-    font-family: 'Koulen', cursive;
+    font-family: 'Koulen', cursive !important;
 }
 #connect_button{
     color: #000 !important;
