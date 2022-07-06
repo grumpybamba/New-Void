@@ -13,7 +13,7 @@ const evmChains = window.evmChains;
 // Web3modal instance
 let web3Modal
 
-let contractaddress = "0xA116e312c1aEa5401db36d2b303F3B6Fe2316bEa";
+let contractaddress = "0xAF6cD7520dfA2B12983E5172EDd312BeFB3cFBc3";
 
 // Chosen wallet provider given by the dialog window
 let provider;
@@ -204,8 +204,8 @@ async function MintFragmnet() {
   const Web3Provider = new _ethers.providers.Web3Provider(instance, "any");
   const signer = Web3Provider.getSigner();
   const contract = await new _ethers.Contract(contractaddress, abi, signer);
-  const transaction = await contract.claimfragment(3, {
-          value: 0,
+  const transaction = await contract.mintfragment(1, {
+          value: _ethers.BigNumber.from("25000000000000000"),
         });
   await transaction.wait();
 }
