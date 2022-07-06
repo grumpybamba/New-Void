@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 /**
  * Example JavaScript code that interacts with the page and Web3 wallets
@@ -13,8 +13,34 @@ const evmChains = window.evmChains;
 // Web3modal instance
 let web3Modal
 
+let contractaddress = "0xA116e312c1aEa5401db36d2b303F3B6Fe2316bEa";
+
 // Chosen wallet provider given by the dialog window
 let provider;
+
+let abi;
+
+function grabData() {
+    fetch("../assets/abi.json")
+    .then(response => {
+        return response.json().then(function(data) {
+            abi = data;
+          // returnData = JSON.parse(data);
+            console.log(data);
+        });
+    })
+
+}
+
+grabData();
+
+
+
+
+// Contract ABI
+
+
+// let parsed = JSON.parse(dataExport)
 
 
 // Address of the selected account
@@ -31,18 +57,10 @@ function init() {
   console.log("Fortmatic is", Fortmatic);
   console.log("window.web3 is", window.web3, "window.ethereum is", window.ethereum);
 
-  // Check that the web page is run in a secure context,
-  // as otherwise MetaMask won't be available
- 
-
-  // Tell Web3modal what providers we have available.
-  // Built-in web browser provider (only one can exist as a time)
-  // like MetaMask, Brave or Opera is added automatically by Web3modal
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
       options: {
-        // Mikko's test key - don't copy as your mileage may vary
         infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
       }
     },
@@ -50,7 +68,6 @@ function init() {
     fortmatic: {
       package: Fortmatic,
       options: {
-        // Mikko's TESTNET api key
         key: "pk_test_391E26A3B43A3350"
       }
     }
@@ -111,10 +128,6 @@ async function fetchAccountData() {
     clone.querySelector(".balance").textContent = humanFriendlyBalance;
     accountContainer.appendChild(clone);
   });
-
-  // Because rendering account does its own RPC commucation
-  // with Ethereum node, we do not want to display any results
-  // until data for all accounts is loaded
   await Promise.all(rowResolvers);
 
   // Display fully loaded UI for wallet data
@@ -123,25 +136,10 @@ async function fetchAccountData() {
 }
 
 
-
-/**
- * Fetch account data for UI when
- * - User switches accounts in wallet
- * - User switches networks in wallet
- * - User connects wallet initially
- */
 async function refreshAccountData() {
 
-  // If any current data is displayed when
-  // the user is switching acounts in the wallet
-  // immediate hide this data
   document.querySelector("#connected").style.display = "none";
   document.querySelector("#prepare").style.display = "block";
-
-  // Disable button while UI is loading.
-  // fetchAccountData() will take a while as it communicates
-  // with Ethereum node via JSON-RPC and loads chain data
-  // over an API call.
   document.querySelector("#btn-connect").setAttribute("disabled", "disabled")
   await fetchAccountData(provider);
   document.querySelector("#btn-connect").removeAttribute("disabled")
@@ -162,7 +160,7 @@ async function onConnect() {
   }
 
   // Subscribe to accounts change
-  provider.on("accountsChanged", (accounts) => {
+  provider.on("accountsChanged", (accounts) => {  
     fetchAccountData();
   });
 
@@ -189,11 +187,6 @@ async function onDisconnect() {
   // TODO: Which providers have close method?
   if(provider.close) {
     await provider.close();
-
-    // If the cached provider is not cleared,
-    // WalletConnect will default to the existing session
-    // and does not allow to re-scan the QR code with a new wallet.
-    // Depending on your use case you may want or want not his behavir.
     await web3Modal.clearCachedProvider();
     provider = null;
   }
@@ -206,11 +199,23 @@ async function onDisconnect() {
 }
 
 
+async function MintFragmnet() {
+  const instance = await web3Modal.connect();
+  const Web3Provider = new _ethers.providers.Web3Provider(instance, "any");
+  const signer = Web3Provider.getSigner();
+  const contract = await new _ethers.Contract(contractaddress, abi, signer);
+  const transaction = await contract.claimfragment(3, {
+          value: 0,
+        });
+  await transaction.wait();
+}
+
+
 /**
  * Main entry point.
  */
 window.addEventListener('load', async () => {
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
-  document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
+  document.querySelector("#btn-mint").addEventListener("click", MintFragmnet);
 });
