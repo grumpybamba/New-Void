@@ -204,7 +204,7 @@ async function MintFragmnet() {
   const Web3Provider = new _ethers.providers.Web3Provider(instance, "any");
   const signer = Web3Provider.getSigner();
   const contract = await new _ethers.Contract(contractaddress, abi, signer);
-  const transaction = await contract.mintfragment(1, {
+  const transaction = await contract.mintfragment(2, {
           value: _ethers.BigNumber.from("25000000000000000"),
         });
   await transaction.wait();
