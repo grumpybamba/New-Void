@@ -21,7 +21,8 @@ let provider;
 let abi;
 
 function grabData() {
-    fetch("../assets/abi.json")
+    fetch('https://grumpybamba.github.io/New-Void/assets/abi.json')
+    // fetch("../assets/abi.json")
     .then(response => {
         return response.json().then(function(data) {
             abi = data;
