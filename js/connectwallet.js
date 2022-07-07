@@ -1,10 +1,5 @@
 // "use strict";
 
-/**
- * Example JavaScript code that interacts with the page and Web3 wallets
- */
-
- // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
 const Fortmatic = window.Fortmatic;
@@ -15,10 +10,11 @@ let web3Modal
 
 let contractaddress = "0xAF6cD7520dfA2B12983E5172EDd312BeFB3cFBc3";
 
-// Chosen wallet provider given by the dialog window
 let provider;
 
 let abi;
+
+let selectedAccount;
 
 function grabData() {
     fetch('https://grumpybamba.github.io/New-Void/assets/abi.json')
@@ -35,22 +31,13 @@ function grabData() {
 
 grabData();
 
+async function ChangeChain(){
+    await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0x4' }],
+  });
+}
 
-
-
-// Contract ABI
-
-
-// let parsed = JSON.parse(dataExport)
-
-
-// Address of the selected account
-let selectedAccount;
-
-
-/**
- * Setup the orchestra
- */
 function init() {
 
   console.log("Initializing example");
@@ -98,7 +85,7 @@ async function fetchAccountData() {
   const chainId = await web3.eth.getChainId();
   // Load chain information over an HTTP API
   const chainData = evmChains.getChain(chainId);
-  document.querySelector("#network-name").textContent = chainData.name;
+  //document.querySelector("#network-name").textContent = chainData.name;
 
   // Get list of accounts of the connected wallet
   const accounts = await web3.eth.getAccounts();
@@ -107,31 +94,32 @@ async function fetchAccountData() {
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
 
-  document.querySelector("#selected-account").textContent = selectedAccount;
+  document.querySelector("#selected-account").textContent = selectedAccount.slice(0,5) + "...." + selectedAccount.slice(selectedAccount.length-5,selectedAccount.length);
 
   // Get a handl
   const template = document.querySelector("#template-balance");
   const accountContainer = document.querySelector("#accounts");
 
   // Purge UI elements any previously loaded accounts
-  accountContainer.innerHTML = '';
+  //accountContainer.innerHTML = '';
 
   // Go through all accounts and get their ETH balance
-  const rowResolvers = accounts.map(async (address) => {
-    const balance = await web3.eth.getBalance(address);
-    // ethBalance is a BigNumber instance
-    // https://github.com/indutny/bn.js/
-    const ethBalance = web3.utils.fromWei(balance, "ether");
-    const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
-    // Fill in the templated row and put in the document
-    const clone = template.content.cloneNode(true);
-    clone.querySelector(".address").textContent = address;
-    clone.querySelector(".balance").textContent = humanFriendlyBalance;
-    accountContainer.appendChild(clone);
-  });
-  await Promise.all(rowResolvers);
+  // const rowResolvers = accounts.map(async (address) => {
+  //   const balance = await web3.eth.getBalance(address);
+  //   // ethBalance is a BigNumber instance
+  //   // https://github.com/indutny/bn.js/
+  //   const ethBalance = web3.utils.fromWei(balance, "ether");
+  //   const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
+  //   // Fill in the templated row and put in the document
+  //   const clone = template.content.cloneNode(true);
+  //   clone.querySelector(".address").textContent = address;
+  //   clone.querySelector(".balance").textContent = humanFriendlyBalance;
+  //   accountContainer.appendChild(clone);
+  // });
+  // await Promise.all(rowResolvers);
 
   // Display fully loaded UI for wallet data
+  
   document.querySelector("#prepare").style.display = "none";
   document.querySelector("#connected").style.display = "block";
 }
@@ -159,6 +147,9 @@ async function onConnect() {
     console.log("Could not get a wallet connection", e);
     return;
   }
+  if (window.ethereum.networkVersion != '4'){
+    ChangeChain();
+  }
 
   // Subscribe to accounts change
   provider.on("accountsChanged", (accounts) => {  
@@ -176,6 +167,13 @@ async function onConnect() {
   });
 
   await refreshAccountData();
+  const accounts = await web3.eth.getAccounts();;
+  selectedAccount = accounts[0];
+  document.querySelector("#selected-account").textContent = selectedAccount.slice(0,5) + "...." + selectedAccount.slice(selectedAccount.length-5,selectedAccount.length);
+
+  document.querySelector("#prepare").style.display = "none";
+  document.querySelector("#connected").style.display = "block";
+  console.log('connected');
 }
 
 /**
@@ -201,8 +199,14 @@ async function onDisconnect() {
 
 
 async function MintFragmnet() {
-  const instance = await web3Modal.connect();
-  const Web3Provider = new _ethers.providers.Web3Provider(instance, "any");
+  if (provider == undefined){
+      provider = await web3Modal.connect();
+  }
+  if (window.ethereum.networkVersion != '4'){
+    ChangeChain();
+  }
+  //const instance = await web3Modal.connect();
+  const Web3Provider = new _ethers.providers.Web3Provider(provider, "any");
   const signer = Web3Provider.getSigner();
   const contract = await new _ethers.Contract(contractaddress, abi, signer);
   const transaction = await contract.mintfragment(2, {
@@ -219,4 +223,5 @@ window.addEventListener('load', async () => {
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-mint").addEventListener("click", MintFragmnet);
+  document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
 });

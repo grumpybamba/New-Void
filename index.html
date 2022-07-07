@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <title>NuVoid Official</title>
-        <meta content="The Loog is an animated portfolio CMS template for creative people like artists or designers." name="description" />
+        <meta content="Welcome to NuVoid." name="description" />
         <meta content="Home 2 | Portfolio === for artist" property="og:title" />
         <meta content="The Loog is an animated portfolio CMS template for creative people like artists or designers." property="og:description" />
         <meta content="https://assets.website-files.com/620c08d8ee2911d26ed8e95a/6215015593a6782efde95805_loog-og-image.jpg" property="og:image" />
@@ -83,9 +83,16 @@
                         <a href="#testis" class="nav-link w-inline-block">
                             <p class="nav-name">FAQ</p>
                         </a>
-                        <button class="nav-link w-inline-block" id="btn-connect">
+                        <div id="prepare" class="nav-link w-inline-block">
+                        <button id="btn-connect">
                             Connect wallet
                         </button>
+                        </div>
+                        <div id="connected" class ="nav-link w-inline-block" style="display: none">
+                        <button  id="btn-disconnect">
+                            Disconnect wallet: <span id="selected-account"></span>
+                        </button>
+                        </div>
                         
                     <div class="menu-button w-nav-button">
                         <div class="menu-inner">
