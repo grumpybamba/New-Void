@@ -3,9 +3,10 @@
 <html data-wf-domain="loog-portfolio-template.webflow.io" data-wf-page="62116f8d6f0dde344f4b582e" data-wf-site="620c08d8ee2911d26ed8e95a">
     <head>
         <meta charset="utf-8" />
+
         <title>NuVoid Official</title>
         <meta content="Welcome to NuVoid." name="description" />
-        <meta content="Home 2 | Portfolio === for artist" property="og:title" />
+        <meta content="Welcome to NuVoid" property="og:title" />
         <meta content="The Loog is an animated portfolio CMS template for creative people like artists or designers." property="og:description" />
         <meta content="https://assets.website-files.com/620c08d8ee2911d26ed8e95a/6215015593a6782efde95805_loog-og-image.jpg" property="og:image" />
         <meta content="Home 2 | Portfolio === for artist" property="twitter:title" />
@@ -42,6 +43,8 @@
         type="text/javascript">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/walletconnect@1.7.8/dist/esm/index.min.js"></script>
+        <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>   
+        <script src="/js/connectwallet.js"></script>
 
 
         <script type="text/javascript">
@@ -51,8 +54,8 @@
                 n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
             }(window, document);
         </script>
-        <link href="https://assets.website-files.com/620c08d8ee2911d26ed8e95a/621505229f8feb74ceaa6607_Favicon.jpg" rel="shortcut icon" type="image/x-icon" />
-        <link href="https://assets.website-files.com/620c08d8ee2911d26ed8e95a/62150526c7c371f815f8787c_Webclip.jpg" rel="apple-touch-icon" />
+        <link href="./assets/img/LogoNuVoid.svg" rel="shortcut icon" type="image/x-icon" />
+        <link href="./assets/img/LogoNuVoid.svg" rel="apple-touch-icon" />
     </head>
     <body>
         <div style="display:flex" class="page-loader">
@@ -84,14 +87,14 @@
                             <p class="nav-name">FAQ</p>
                         </a>
                         <div id="prepare" class="nav-link w-inline-block">
-                        <button id="btn-connect">
-                            Connect wallet
-                        </button>
+                            <a id="btn-connect" style="display: block;padding: inherit;">
+                                Connect Wallet
+                            </a>
                         </div>
-                        <div id="connected" class ="nav-link w-inline-block" style="display: none">
-                        <button  id="btn-disconnect">
-                            Disconnect wallet: <span id="selected-account"></span>
-                        </button>
+
+                        <div id="connected" class="nav-link w-inline-block" style="display: none">
+                            <a id="btn-disconnect" style="display: block; padding-top: inherit;line-height: inherit;">
+                            </a>
                         </div>
                         
                     <div class="menu-button w-nav-button">
@@ -115,7 +118,7 @@
                                     <div class="oval-1" ></div>
                                     <div class="oval-2"></div>
                                     <div class="oval-3"></div>
-                                    <img src="./assets/img/Silhouettes.gif" loading="lazy" sizes="(max-width: 479px) 76vw, (max-width: 991px) 345.59375px, (max-width: 1439px) 36vw, (max-width: 1919px) 468px, 504px" srcset="" alt="Loog === Image" class="cover-image home-animation-trigger" style="border: 20px ;" id="sill" />
+                                    <img src="./assets/img/Silhouettes.jpg" loading="lazy" sizes="(max-width: 479px) 76vw, (max-width: 991px) 345.59375px, (max-width: 1439px) 36vw, (max-width: 1919px) 468px, 504px" srcset="" alt="Loog === Image" class="cover-image home-animation-trigger" style="border: 20px ;" id="sill" />
                                 </div>
                             </div>
                         </div>
@@ -140,11 +143,6 @@
                             </div>
                         
                         </div>
-                        <section>
-                            
-                        </section>
-            
-
 
                         <div class="footer-content">
                             <div class="footer-content-inner">
@@ -193,11 +191,11 @@
                                             </div>
                                         </div>
                                         <div class="scope-content">
-                                            <p class="heading is-scope-title-2">The fire realm</p>
+                                            <p class="heading is-scope-title-2">Flames of creation</p>
                                             <div class="waves in-about-page"></div>
-                                            <p class="scope-paragraph">Wonder through the void to collect the fragments.</p>
+                                            <p class="scope-paragraph">Enter the fire realm and mint the flame of creation</p>
                                             <button  class="main-button w-inline-block" id="btn-mint">
-                                                <p class="main-button-text">Artworks</p>
+                                                <p class="main-button-text">Mint</p>
                                                 <img src="https://assets.website-files.com/620c08d8ee2911d26ed8e95a/620d34d5774bbd0fb9337fd7_arrow_forward_black_24dp.svg" loading="lazy" alt="" class="main-button-icon" />
                                             </button>
                                         </div>
@@ -391,15 +389,6 @@
                 $(".w-webflow-badge").removeClass("w-webflow-badge").empty();
     
             });
-    
         </script>
-        <script type="text/javascript" src="./assets/abi.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
-        <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>   
-        <script src="/js/connectwallet.js"></script>
     </body>
 </html>

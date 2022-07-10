@@ -50,7 +50,7 @@ element.style{
 }
 .main-button{
     background-color: #E63D63 !important;
-    border-radius: 0%;
+    border-radius: 0% !important;
 }
 .circle-in-corner{
     background-color:#E63D63 !important;
@@ -76,4 +76,34 @@ a{
 }
 .hkzEld {
     z-index: 10 !important;  
+}
+/* #btn-disconnect{
+    background-color: inherit;
+    color: inherit;
+    position: absolute !important;
+    text-align:center !important;
+    align-items: inherit;
+    display: inline-block !important;
+}
+#btn-disconnect:hover{
+    color: inherit;
+    background-color: inherit;
+    position: relative;
+    text-align:center;
+    align-items: center;
+    display: inline-block !important;
+} */
+a{
+    color: #000 !important;
+}
+.nav-link{
+    letter-spacing: 0 !important;
+}
+#btn-connect{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+#btn-disconnect{
+    text-align: center !important;
+    vertical-align: middle !important;
 }
